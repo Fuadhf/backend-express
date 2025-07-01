@@ -1,4 +1,5 @@
 const prisma = require('../prisma/client/index');
+const { validationResult } = require('express-validator')
 const bcrypt = require('bcrypt');
 
 const findUser = async (req, res) => {
@@ -36,9 +37,9 @@ const createUser = async (req, res) => {
       errors: errors.array(),
     });
   }
-
+  
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
   try {
-    const hashedPassword = await bcrypt.compare(req.body.password, user.password);
     const user = await prisma.user.create({
       data: {
         name: req.body.name,
@@ -89,7 +90,8 @@ const findUserById = async (req, res) => {
 };
 
 const updateUserById = async (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
+  console.log(id)
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ 
@@ -99,8 +101,8 @@ const updateUserById = async (req, res) => {
     });
   }
 
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
   try {
-    const hashedPassword = await bcrypt.compare(req.body.password, user.password);
     const user = await prisma.user.update({
       where: {
         id: Number(id)
@@ -126,7 +128,7 @@ const updateUserById = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
 
   try {
     await prisma.user.delete({
