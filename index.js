@@ -9,7 +9,7 @@ app.use(cors({
   origin: "https://admin.tirex.my.id",
   credentials: true
 }));
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(express.json());
 
 app.get('/', (req, res) => {
