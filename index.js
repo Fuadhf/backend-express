@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-  origin: "https://backend-express-production-8b41.up.railway.app",
+  origin: "https://admin.tirex.my.id",
   credentials: true
 }));
 app.use(cookieParser);
