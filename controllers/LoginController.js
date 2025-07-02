@@ -42,6 +42,11 @@ const login = async (req, res) => {
     }
 
     const token = await jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    })
     const { password, ...userWithoutPassword } = user;
     return res.status(200).json({
       success: true,
