@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: "https://admin.tirex.my.id",
+  origin: "https://frontend-svelte-one.vercel.app",
   credentials: true
 }));
 app.use(cookieParser());
