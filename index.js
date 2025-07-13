@@ -1,12 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./routes/index')
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const origin = require('./utils/validator/cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: "https://frontend-svelte-one.vercel.app",
+  origin: origin,
   credentials: true
 }));
 app.use(cookieParser());
