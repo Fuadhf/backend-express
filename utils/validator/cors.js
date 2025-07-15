@@ -1,4 +1,4 @@
-const allowedOrigin = ["https://frontend-svelte-one.vercel.app", "http://localhost:5173"];
+const allowedOrigin = ["https://frontend-svelte-one.vercel.app", "https://project-vue-two.vercel.app"];
 
 const origin = function(origin, callback) {
   if (!origin) return callback(null, true);
